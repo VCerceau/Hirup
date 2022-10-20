@@ -6,3 +6,6 @@ class Presentation(models.Model):
          primary_key = True,
          default = uuid.uuid4,
          editable = False)
+    
+    class Meta:
+        abstract = True

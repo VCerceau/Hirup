@@ -3,4 +3,5 @@ from .presentation import *
 
 
 class Cv(Presentation):
-    name = models.CharField(max_length=30)
+    name = models.TextField()
+    eleves = models.ForeignKey('User.Personnes', on_delete=models.CASCADE)
