@@ -1,7 +1,7 @@
 from django.db import models
 import uuid
 from .categorie import *
-from User.models import Personnes
+from User.models import Personne
 
 class Competences(models.Model):
      uuid = models.UUIDField(
@@ -11,4 +11,4 @@ class Competences(models.Model):
      title = models.TextField()
      description = models.TextField()
      categorie = models.ForeignKey(Categorie, null=True, on_delete = models.SET_NULL)
-     certifie = models.ForeignKey(Personnes, on_delete=models.CASCADE)
+     certifie = models.ForeignKey(Personne, on_delete=models.CASCADE)

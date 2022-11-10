@@ -8,13 +8,13 @@ class User(models.Model):
          default = uuid.uuid4,
          editable = False)
      email = models.EmailField()
-     password = models.TextField(max_length=64)
-     street = models.TextField()
-     city = models.TextField()
-     code = models.TextField()
-     country = models.TextField()
+     password = models.CharField(max_length=64)
+     street = models.CharField(max_length=64)
+     city = models.CharField(max_length=64)
+     code = models.IntegerField()
+     country = models.CharField(max_length=64)
      
 
-     class Meta:
+     class Meta: 
         abstract = True
 

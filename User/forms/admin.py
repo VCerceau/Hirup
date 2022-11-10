@@ -1,8 +1,10 @@
 from django.db import models
+from django import forms
 from .user import *
-from User.models import User
+from User.models import *
 
 
-class AdminForm(User):
-    model = User
-    fields = ['email','password','name','street','city','code','country']
+class AdminForm(forms.Form):
+    class Meta:    
+        model = Admin
+        fields = ['uuid','email','password','name','street','city','code','country']
