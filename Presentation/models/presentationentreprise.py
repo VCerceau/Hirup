@@ -1,8 +1,10 @@
 from django.db import models
 from .presentation import *
 from User.models.entreprise import *
+from .introduction import *
 
 
 class PresentationEntreprise(Presentation):
     description = models.TextField()
     entreprise = models.ForeignKey(Entreprise, on_delete=models.CASCADE)
+    introduction = models.ForeignKey(Introduction, on_delete=models.CASCADE)
