@@ -9,3 +9,5 @@ class Presentation(models.Model):
     
     class Meta:
         abstract = True
+        
+    

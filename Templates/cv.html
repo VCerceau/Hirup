@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% for cv in cvs %}
+  <div class="container">
+    <h1> {{cv.name}} </h1>
+  {% for formation in formations  %}
+    {% if formation.cv.uuid == cv.uuid %}  
+      <div>
+          <h1> {{formation.title}} </h1>
+          <h1> {{formation.description}} </h1>
+      </div>
+    {% endif %}
+  {% endfor %}
+  </div>
+  {% endfor %} 
+{% endblock content %}

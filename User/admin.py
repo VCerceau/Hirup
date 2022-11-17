@@ -1,6 +1,9 @@
 from django.contrib import admin as djangoadmin
 from .models import *
+from django.contrib.auth.admin import UserAdmin
+from .models import User
 # Register your models here.
+
 
 class AdminAdmin(djangoadmin.ModelAdmin):
     pass

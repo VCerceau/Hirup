@@ -13,8 +13,10 @@ class Formation(models.Model):
     title = models.CharField(max_length=32)
     description = models.TextField()
     order = models.IntegerField()
-    mention = models.TextField()
+    mention = models.TextField(null=True)
     categorie = models.ForeignKey(Categorie, null=True, on_delete = models.SET_NULL)
-    certifie = models.ForeignKey(Personne, on_delete=models.CASCADE)
+    certifie = models.ForeignKey(Personne,null=True, on_delete=models.CASCADE)
     cv = models.ForeignKey(Cv, on_delete=models.CASCADE)
-
+    
+    def __str__(self):
+        return f"{self.title}, {self.uuid}"

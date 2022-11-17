@@ -1,15 +1,4 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-  </head>
-  <body>
-    {% for formation in formations %}
-    <div>
-        <h1> {{formation.title}} </h1>
-    </div>
-    {% endfor %}
-  </body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+    <p> Hello World </p>
+{% endblock content %}

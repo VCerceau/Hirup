@@ -5,3 +5,6 @@ from .user import User
 class Admin(User):
     name = models.TextField()
     
+    class Meta:
+        verbose_name = 'Admin'
+    

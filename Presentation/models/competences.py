@@ -13,5 +13,5 @@ class Competences(models.Model):
     description = models.TextField()
     order = models.IntegerField()
     categorie = models.ForeignKey(Categorie, null=True, on_delete = models.SET_NULL)
-    certifie = models.ForeignKey(Personne, on_delete=models.CASCADE)
+    certifie = models.ForeignKey(Personne,null=True, on_delete=models.CASCADE)
     cv = models.ForeignKey(Cv, on_delete=models.CASCADE)

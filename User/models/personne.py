@@ -14,3 +14,6 @@ class Personne(User):
         max_length=20,
         choices=ROLE_CHOICES,
     )
+    
+    class Meta:
+        verbose_name = 'Personne'
