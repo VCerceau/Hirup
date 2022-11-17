@@ -2,11 +2,11 @@
 <div class="container">
     <header class="d-flex justify-content-center py-3">
         <ul class="nav nav-pills">
-            <li class="nav-item"><a href={% url 'index' %} class="nav-link active" aria-current="page">Home</a></li>
-            <li class="nav-item"><a href={% url 'cv' %} class="nav-link">Cv</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+            <li class="nav-item"><a href={% url 'index' %} {% if request.get_full_path == '/' %} class="nav-link active" {% else %} class="nav-link" {% endif %}>Home</a></li>
+            <li class="nav-item"><a href={% url 'cv' %}  {% if request.get_full_path == '/cv/' %} class="nav-link active" {% else %} class="nav-link" {% endif %} >Cv</a></li>
+            <li class="nav-item"><a href="#"  {% if request.get_full_path == 'test' %} class="nav-link active" {% else %} class="nav-link" {% endif %} >Pricing</a></li>
+            <li class="nav-item"><a href="#" {% if request.get_full_path == 'test' %} class="nav-link active" {% else %} class="nav-link" {% endif %} >FAQs</a></li>
+            <li class="nav-item"><a href={% url 'login' %} {% if request.path == '/login/' %} class="nav-link active" {% else %} class="nav-link" {% endif %} >Login</a></li>
         </ul>
     </header>
   </div>

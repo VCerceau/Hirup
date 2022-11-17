@@ -6,8 +6,8 @@
   {% for formation in formations  %}
     {% if formation.cv.uuid == cv.uuid %}  
       <div>
-          <h1> {{formation.title}} </h1>
-          <h1> {{formation.description}} </h1>
+          <h2><u> {{formation.title}} </u></h2>
+          <p> {{formation.description}} </p>
       </div>
     {% endif %}
   {% endfor %}
