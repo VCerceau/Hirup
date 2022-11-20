@@ -11,7 +11,7 @@ class User(AbstractUser):
         primary_key = True,
         default = uuid.uuid4,
         editable = False)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     password = models.CharField(max_length=256)
     street = models.CharField(max_length=64, null=True)
     city = models.CharField(max_length=64, null=True)
@@ -21,7 +21,7 @@ class User(AbstractUser):
     
     
     def __str__(self):
-        return f"{self.email, self.uuid}"
+        return f"{self.email}"
     
     def save(self,*args, **kwargs):
         self.password = make_password(self.password, salt=None)
