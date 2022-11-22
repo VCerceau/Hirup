@@ -1,0 +1,64 @@
+.hirupnav{
+  background: rgba(241, 237, 227, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-family: "Mitr";
+  font-size:x-large
+}
+body{
+  background: #FFFAF0;
+  margin-top: 80px;
+  font-family: "M PLUS Rounded 1c";
+}
+.content{
+  background: #FFFAF0;
+  height: 85vh;
+}
+.nav-link.selected{
+  color: #FF9A16;
+}
+.nav-link{
+  color: black;
+}
+
+.logo.top{
+    margin-top: -10px;
+    margin-bottom: -8px;
+}
+
+.nav-link:hover{
+  color: #FF9A16
+}
+.top-10{
+  top: 10%;
+}
+
+.top-30{
+  top: 30%;
+}
+
+.btn-yellowhirup{
+  background-color: #FF9A16;
+  width: 200px;
+  height: 60px;
+}
+
+h1{
+  font-family: "Mitr";
+  font-weight: 400;
+}
+
+h2{
+  font-family: "M PLUS Rounded 1c";
+  font-weight: 400;
+  text-align: center;
+
+}
+
+@media only screen and (max-width: 991px) {
+  .hirupnav{
+    background: rgba(241, 237, 227, 1);
+  }
+}

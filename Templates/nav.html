@@ -1,12 +1,17 @@
-
-<div class="container">
-    <header class="d-flex justify-content-center py-3">
-        <ul class="nav nav-pills">
-            <li class="nav-item"><a href={% url 'index' %} {% if request.get_full_path == '/' %} class="nav-link active" {% else %} class="nav-link" {% endif %}>Home</a></li>
-            <li class="nav-item"><a href={% url 'cv' %}  {% if request.get_full_path == '/cv/' %} class="nav-link active" {% else %} class="nav-link" {% endif %} >Cv</a></li>
-            <li class="nav-item"><a href="#"  {% if request.get_full_path == 'test' %} class="nav-link active" {% else %} class="nav-link" {% endif %} >Pricing</a></li>
-            <li class="nav-item"><a href="#" {% if request.get_full_path == 'test' %} class="nav-link active" {% else %} class="nav-link" {% endif %} >FAQs</a></li>
-            <li class="nav-item"><a href={% url 'login' %} {% if request.path == '/login/' %} class="nav-link active" {% else %} class="nav-link" {% endif %} >Login</a></li>
-        </ul>
-    </header>
-  </div>
+{% load static %}
+<nav class="navbar navbar-expand-lg">
+    <div class="hirupnav container-fluid">
+        <a href={% url 'index' %} {% if request.get_full_path == '/' %} class="nav-link selected" {% else %} class="nav-link" {% endif %}><div class="logo-image"><img src={% static 'img/logo.webp' %} width="140" alt="Hirup" class="logo top"></div></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav nav-pills navtext me-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a href={% url 'login' %} {% if request.path == '/login/' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Profil</a></li>
+                        <li class="nav-item"><a href={% url 'cv' %}  {% if request.get_full_path == '/cv/' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Cv</a></li>
+                        <li class="nav-item"><a href="#"  {% if request.get_full_path == 'test' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Rechercher</a></li>
+                        <li class="nav-item"><a href="#" {% if request.get_full_path == 'test' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Professeurs</a></li>
+                </ul>
+            </div>
+    </div>
+</nav>
