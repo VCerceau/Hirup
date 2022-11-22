@@ -7,7 +7,6 @@ from Presentation.models.cv import *
 # Create your views here.
 
 def index(request):
-
     return render(request, 'index.html')
 
 def Cvs(request):

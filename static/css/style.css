@@ -5,12 +5,15 @@
   left: 0;
   width: 100%;
   font-family: "Mitr";
-  font-size:x-large
+  font-size:x-large;
+  color: #1b0c02;
 }
 body{
   background: #FFFAF0;
   margin-top: 80px;
   font-family: "M PLUS Rounded 1c";
+  color: #1b0c02;
+
 }
 .content{
   background: #FFFAF0;
@@ -20,7 +23,7 @@ body{
   color: #FF9A16;
 }
 .nav-link{
-  color: black;
+  color: #1b0c02;
 }
 
 .logo.top{
@@ -61,4 +64,8 @@ h2{
   .hirupnav{
     background: rgba(241, 237, 227, 1);
   }
+}
+
+.profilpic{
+  border-radius: 50%;
 }

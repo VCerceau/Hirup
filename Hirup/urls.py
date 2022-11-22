@@ -24,6 +24,7 @@ urlpatterns = [
     path('interfaceadmintqt/', admin.site.urls),
     path('', pviews.index, name='index'),
     path('cv/', pviews.Cvs, name='cv'),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    
+    path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='login'),
+    path('logout/',uviews.logout, name='logout'),
+    path('profil/',uviews.profil, name='profil')
 ]
