@@ -65,6 +65,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.media',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -86,29 +87,29 @@ WSGI_APPLICATION = 'Hirup.wsgi.application'
 #     }
 # }
 
-#Pour mysql avec serveur
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'hirup',
-#         'USER': 'hirup',
-#         'PASSWORD': 'hiruppassword',
-#         'HOST': '172.16.119.9',
-#         'PORT': '3306',
-#     }
-# }
-
-# Avec localhost
+# Pour mysql avec serveur
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'hirup',
         'USER': 'hirup',
         'PASSWORD': 'hiruppassword',
-        'HOST': 'localhost',
+        'HOST': '172.16.119.9',
         'PORT': '3306',
     }
-}  
+}
+
+# # Avec localhost
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'hirup',
+#         'USER': 'hirup',
+#         'PASSWORD': 'hiruppassword',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }  
 
 
 
@@ -116,6 +117,8 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -156,9 +159,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "Static",
 ]
-STATIC_URL = 'static/'
+STATIC_URL = 'Static/'
+
+# Path where media is stored
+MEDIA_ROOT = BASE_DIR / 'Media'
+MEDIA_URL = '/Media/'
 
 
 

@@ -4,7 +4,8 @@ from .user import *
 from User.models import *
 
 
-class AdminForm(forms.Form):
-    class Meta:    
-        model = Admin
-        fields = ['uuid','email','password','name','street','city','code','country']
+from django import forms
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    class Meta:
+        model = User

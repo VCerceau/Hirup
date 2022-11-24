@@ -7,8 +7,7 @@ def login(request):
 
     return render(request, 'user/login.html')
 
-def logout_view(request):
-    logout(request)
+
 
 def profil(request):
     user = User.objects.all()

@@ -18,13 +18,15 @@ from django.urls import path, include
 from Presentation import views as pviews
 from User import views as uviews
 from django.contrib.auth import views as auth_views
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('interfaceadmintqt/', admin.site.urls),
     path('', pviews.index, name='index'),
     path('cv/', pviews.Cvs, name='cv'),
     path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='login'),
-    path('logout/',uviews.logout, name='logout'),
-    path('profil/',uviews.profil, name='profil')
-]
+    path('logout/', auth_views.LogoutView.as_view(next_page=settings.LOGOUT_REDIRECT_URL), name='logout'),
+    path('profil/',uviews.profil, name='profil'),
+    path("signup/", auth_views.SignUpView.as_view(), name="signup"),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

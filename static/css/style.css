@@ -69,3 +69,7 @@ h2{
 .profilpic{
   border-radius: 50%;
 }
+
+.line {
+  border-right: 2px solid black;
+}
