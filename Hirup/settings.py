@@ -87,29 +87,29 @@ WSGI_APPLICATION = 'Hirup.wsgi.application'
 #     }
 # }
 
-# Pour mysql avec serveur
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'hirup',
-        'USER': 'hirup',
-        'PASSWORD': 'hiruppassword',
-        'HOST': '172.16.119.9',
-        'PORT': '3306',
-    }
-}
-
-# # Avec localhost
+# # Pour mysql avec serveur
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'hirup',
 #         'USER': 'hirup',
 #         'PASSWORD': 'hiruppassword',
-#         'HOST': 'localhost',
+#         'HOST': '172.16.119.9',
 #         'PORT': '3306',
 #     }
-# }  
+# }
+
+# Avec localhost
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'hirup',
+        'USER': 'hirup',
+        'PASSWORD': 'hiruppassword',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}  
 
 
 
