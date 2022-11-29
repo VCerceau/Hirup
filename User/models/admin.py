@@ -3,7 +3,8 @@ from .user import User
 
 
 class Admin(User):
-    name = models.TextField()
+    is_staff = 1
+    is_superuser = 1    
     
     class Meta:
         verbose_name = 'Admin'

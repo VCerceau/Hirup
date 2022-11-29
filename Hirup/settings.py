@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_resized',
     'Presentation',
     'User',
 ]
@@ -87,29 +88,29 @@ WSGI_APPLICATION = 'Hirup.wsgi.application'
 #     }
 # }
 
-# # Pour mysql avec serveur
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'hirup',
-#         'USER': 'hirup',
-#         'PASSWORD': 'hiruppassword',
-#         'HOST': '172.16.119.9',
-#         'PORT': '3306',
-#     }
-# }
-
-# Avec localhost
+# Pour mysql avec serveur
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'hirup',
         'USER': 'hirup',
         'PASSWORD': 'hiruppassword',
-        'HOST': 'localhost',
+        'HOST': '172.16.119.9',
         'PORT': '3306',
     }
-}  
+}
+
+# # Avec localhost
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'hirup',
+#         'USER': 'hirup',
+#         'PASSWORD': 'hiruppassword',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }  
 
 
 
@@ -173,3 +174,10 @@ MEDIA_URL = '/Media/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+DJANGORESIZED_DEFAULT_SIZE = [200, 200]
+DJANGORESIZED_DEFAULT_QUALITY = 75
+DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'WEBP'
+DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'WEBP': ".webp"}
+
