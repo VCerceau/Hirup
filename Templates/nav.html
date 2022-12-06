@@ -7,7 +7,7 @@
         </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav nav-pills navtext me-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a href={% url 'profil' %} {% if request.path == '/profil/' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Profil {{user.email}}</a></li>
+                        <li class="nav-item"><a href={% url 'profil' %} {% if request.path == '/profil/' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Profil</a></li>
                         <li class="nav-item"><a href={% url 'cv' %}  {% if request.get_full_path == '/cv/' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Cv</a></li>
                         <li class="nav-item"><a href="#"  {% if request.get_full_path == 'test' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Rechercher</a></li>
                         <li class="nav-item"><a href="#" {% if request.get_full_path == 'test' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Professeurs</a></li>
@@ -15,9 +15,7 @@
                 <ul class="navbar-nav nav-pills navtext mb-2 mb-lg-0 d-flex justify-content-between">
                 {% if request.user.is_authenticated %}
                     <li class="nav-item"><a href={% url 'logout' %} {% if request.get_full_path == '/login/' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Se déconnecter</a></li>
-                    <a href={% url 'login' %}><div class="profilpic"><img src={{MEDIA_URL}}{{user.get_photo_url}} {% comment %}
-	onError="this.onerror=null; this.src='{{MEDIA_URL}}user/pp/default.png';"
-{% endcomment %} alt="Profil" width="50" height="50" class="logo top"></div></a>
+                    <a href={% url 'login' %}><div class="profilpic"><img src={{MEDIA_URL}}{{user.get_photo_url}} onError="this.onerror=null; this.src='{{MEDIA_URL}}user/pp/default.webp';" alt="Profil" width="50" height="50" class="logo top"></div></a>
                 {% else %}
                     <li class="nav-item"><a href={% url 'login' %} {% if request.get_full_path == '/login/' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Se connecter</a></li>
                 {% endif %}
