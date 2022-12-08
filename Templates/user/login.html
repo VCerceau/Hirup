@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
 {% if request.user.is_authenticated %}
-
 {% else %}
-{% block content %}
-    <div class="container">
-        <h2>Log In</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-        <a href={% url 'index' %}>
-            <button type="submit">Log In</button>
-        </a>
-        </form>
-    </div>
-{% endblock content %}
+    {% block content %}
+        <div class="container">
+            <h2>Log In</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+            <a href={% url 'index' %}>
+                <button type="submit">Log In</button>
+            </a>
+            </form>
+        </div>
+    {% endblock content %}
 {% endif %}

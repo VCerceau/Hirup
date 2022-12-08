@@ -10,8 +10,4 @@ def login(request):
 
 
 def profil(request):
-    user = User.objects.all()
-    context = {
-        'user': user
-    }
-    return render(request, 'user/profil.html', context)
+    return render(request, 'user/profil.html')

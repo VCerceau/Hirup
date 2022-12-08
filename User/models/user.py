@@ -50,3 +50,6 @@ class User(AbstractUser):
     
     def get_photo_full_path(self):
         return ('/Media/') + str(self.profilpic)
+    
+    def email(self):
+        return self.username

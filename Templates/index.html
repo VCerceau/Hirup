@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="position-relative h-100">
-        <div class="position-absolute top-10 start-50 translate-middle-x"> <h1>Bienvenue sur Hirup</h1></div>
-        <div class="position-absolute top-30 start-50 translate-middle-x"> <h2>Commencez par créer <br> votre CV</h2></div>
-        <div class="position-absolute top-50 start-50 translate-middle-x"> <button type="button" class="btn btn-yellowhirup btn-lg">Créer votre CV</button></div>
-        
-    </div>
+    <div class="container">
+        <div class="d-flex align-items-center row justify-content-center align-items-center">
+            <div class="col-md-12 mt-80 text-center">
+                <h1>Bienvenue sur Hirup</h1>
+            </div>
+            <div class="col-md-12 y-80 text-center">
+                <h2>Commencez par créer <br> votre CV</h2>
+            </div>
+            <div class="col-md-12 mt-80 text-center">
+                <button type="button" class="btn btn-yellowhirup btn-lg">Créer votre CV</button>
+            </div>
+        </div>
+      </div>
 {% endblock content %}

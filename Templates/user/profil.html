@@ -1,17 +1,81 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+{% endblock style %}
 {% block content %}
-        <div class="row">
-                <div class="col-4 col-md-3 line text-center">
-                        <div> bla</div>
-                        <div> bla</div>
-                        <div> bla</div>
-                        <div> bla</div>
-                        <div> bla</div>
-                        <div> bla</div>
-                        <div> bla</div>
-                        <div> bla</div>
-                        <div> bla</div>
-                </div>
-                <div class="col-md-8">.col-md-8</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="{{MEDIA_URL}}{{user.get_photo_url}} " id="pp" class="img-fluid rounded-circle">
+            <input type="file">
         </div>
+
+        <div class="col-sm-8">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control border-0" id="email" value=" {{user.email}} " readonly>
+                <button type="button" class="btn btn-primary btn-sm mt-2">
+                    <i class="fas fa-pen"></i>
+                </button>
+            </div>
+            <hr>
+            <div class="form-group">
+                <label for="prenom">Prénom</label>
+                <input type="text" class="form-control border-0" id="prenom" value="[prénom de l'utilisateur]" readonly>
+                <button type="button" id="test" class="btn btn-primary btn-sm mt-2">
+                    <i class="fas fa-pen"></i>
+                </button>
+            </div>
+            <hr>
+            <div class="form-group">
+                <label for="telephone">Téléphone</label>
+                <input type="text" class="form-control border-0" id="telephone" value="[numéro de téléphone de l'utilisateur]" readonly>
+                <button type="button" class="btn btn-primary btn-sm mt-2">
+                    <i class="fas fa-pen"></i>
+                </button>
+            </div>
+            <hr>
+            <div class="form-group">
+                <label for="adresse">Adresse</label>
+                <input type="text" class="form-control border-0" id="adresse" value="[adresse de l'utilisateur]" readonly>
+                <button type="button" class="btn btn-primary btn-sm mt-2">
+                    <i class="fas fa-pen"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // Récupérer tous les boutons avec un crayon
+    const buttons = document.querySelectorAll('button');
+    
+    // Ajouter un gestionnaire d'événement click pour chaque bouton
+    buttons.forEach(button => {
+        button.addEventListener('click', event => {
+            // Récupérer le champ associé au bouton cliqué
+            const input = button.previousElementSibling;
+
+            // Changer l'état de lecture seule du champ
+            input.readOnly = !input.readOnly;
+
+            
+        });
+    });
+
+    // Récupérer l'élément input pour l'image de profil
+    const input = document.querySelector('input[type="file"]');
+
+    // Ajouter un gestionnaire d'événement change pour l'élément input
+    input.addEventListener('change', event => {
+        // Récupérer l'image choisie par l'utilisateur
+        const image = event.target.files[0];
+
+        // Récupérer l'élément img pour l'image de profil
+        const img = document.getElementById('pp');
+
+        // Mettre à jour l'attribut src de l'élément img avec l'image choisie par l'utilisateur
+        img.src = URL.createObjectURL(image);
+    });
+</script>
 {% endblock content %}

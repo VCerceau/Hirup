@@ -1,7 +1,7 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg">
     <div class="hirupnav container-fluid">
-        <a href={% url 'index' %} {% if request.get_full_path == '/' %} class="nav-link selected" {% else %} class="nav-link" {% endif %}><div class="logo-image"><img src={{MEDIA_URL}}logo.webp width="140" alt="Hirup" class="logo top"></div></a>
+        <a href={% url 'index' %} {% if request.get_full_path == '/' %} class="nav-link selected" {% else %} class="nav-link" {% endif %}><div class="logo-image"><img src={{MEDIA_URL}}logo.webp alt="Hirup" class="img-fluid hirupimg logo top"></div></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -15,7 +15,7 @@
                 <ul class="navbar-nav nav-pills navtext mb-2 mb-lg-0 d-flex justify-content-between">
                 {% if request.user.is_authenticated %}
                     <li class="nav-item"><a href={% url 'logout' %} {% if request.get_full_path == '/login/' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Se déconnecter</a></li>
-                    <a href={% url 'login' %}><div class="profilpic"><img src={{MEDIA_URL}}{{user.get_photo_url}} onError="this.onerror=null; this.src='{{MEDIA_URL}}user/pp/default.webp';" alt="Profil" width="50" height="50" class="logo top"></div></a>
+                    <a href={% url 'profil' %}><div class="profilpic"><img src={{MEDIA_URL}}{{user.get_photo_url}} onError="this.onerror=null; this.src='{{MEDIA_URL}}user/pp/default.webp';" alt="Profil" width="50" height="50" class="img-fluid rounded-circle logo top"></div></a>
                 {% else %}
                     <li class="nav-item"><a href={% url 'login' %} {% if request.get_full_path == '/login/' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Se connecter</a></li>
                 {% endif %}
