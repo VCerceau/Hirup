@@ -12,7 +12,7 @@
                         <li class="nav-item"><a href="#"  {% if request.get_full_path == 'test' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Rechercher</a></li>
                         <li class="nav-item"><a href="#" {% if request.get_full_path == 'test' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Professeurs</a></li>
                 </ul>
-                <ul class="navbar-nav nav-pills navtext mb-2 mb-lg-0 d-flex justify-content-between">
+                <ul class="navbar-nav nav-pills navtext mb-2 mb-lg-0 justify-content-between">
                 {% if request.user.is_authenticated %}
                     <li class="nav-item"><a href={% url 'logout' %} {% if request.get_full_path == '/login/' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Se déconnecter</a></li>
                     <a href={% url 'profil' %}><div class="profilpic"><img src={{MEDIA_URL}}{{user.get_photo_url}} onError="this.onerror=null; this.src='{{MEDIA_URL}}user/pp/default.webp';" alt="Profil" width="50" height="50" class="img-fluid rounded-circle logo top"></div></a>

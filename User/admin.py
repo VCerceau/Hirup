@@ -4,11 +4,6 @@ from django.contrib.auth.admin import UserAdmin
 from .models import User
 # Register your models here.
 
-
-class AdminAdmin(djangoadmin.ModelAdmin):
-    pass
-djangoadmin.site.register(Admin, AdminAdmin)
-
 class PersonnesAdmin(djangoadmin.ModelAdmin):
     pass
 djangoadmin.site.register(Personne, PersonnesAdmin)
