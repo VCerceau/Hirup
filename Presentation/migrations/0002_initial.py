@@ -65,17 +65,17 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='User.personne'),
         ),
         migrations.AddField(
-            model_name='competences',
+            model_name='competence',
             name='categorie',
             field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='Presentation.categorie'),
         ),
         migrations.AddField(
-            model_name='competences',
+            model_name='competence',
             name='certifie',
             field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='User.personne'),
         ),
         migrations.AddField(
-            model_name='competences',
+            model_name='competence',
             name='cv',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Presentation.cv'),
         ),

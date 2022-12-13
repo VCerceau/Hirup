@@ -3,6 +3,11 @@ from User.models.personne import *
 
 from django import forms
 
+class PersonneForm(forms.ModelForm):
+  class Meta:
+    model = Personne
+    fields = ['profilpic', 'first_name', 'last_name', 'adresse']
+
 class EditProfileForm(forms.Form):
     email = forms.EmailField(widget=forms.TextInput(attrs={
         'class': 'form-control border-0',

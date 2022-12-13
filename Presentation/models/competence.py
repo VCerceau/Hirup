@@ -4,12 +4,12 @@ from .categorie import *
 from .cv import *
 from User.models import Personne
 
-class Competences(models.Model):
+class Competence(models.Model):
     uuid = models.UUIDField(
         primary_key = True,
         default = uuid.uuid4,
         editable = False)
-    title = models.TextField()
+    title = models.CharField(max_length=64)
     description = models.TextField()
     order = models.IntegerField()
     categorie = models.ForeignKey(Categorie, null=True, on_delete = models.SET_NULL)

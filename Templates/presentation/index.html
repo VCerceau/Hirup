@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="add-skill-page">
+  <h1>Ajouter une compétence</h1>
+  <form action={% url 'add_skill' %} method="post"></form>
+    <label for="skill-name">Nom de la compétence :</label>
+    <input type="text" id="skill-name" name="skill-name">
+
+    <input type="submit" value="Ajouter">
+  </form>
+</div>
+{% endblock content %}
