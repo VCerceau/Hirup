@@ -19,18 +19,18 @@ def profil(request):
 
         # Vérifier si le formulaire est valide
         if form.is_valid():
+            form.save(user=request.user.personne)
             # Enregistrer les données du formulaire en utilisant l'utilisateur actuel
-            form.save(personne=request.personne)
             # Afficher un message de succès ou rediriger vers une autre page ici
     else:
         # Récupérer les données de l'utilisateur actuel pour préremplir le formulaire
         initial_data = {
-            'email': request.user.email,
-            'firstname': request.user.firstname,
-            'lastname': request.user.lastname,
-            'phonenumber': request.user.phonenumber,
-            'adress': request.user.adress,
             'profilpic': request.user.profilpic,
+            'email': request.user.username,
+            'firstname': request.user.personne.firstname,
+            'lastname': request.user.personne.lastname,
+            'phonenumber': request.user.phonenumber,
+            'adresse': request.user.adresse,
         }
         form = EditProfileForm(initial=initial_data)
 

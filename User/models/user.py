@@ -14,7 +14,8 @@ class User(AbstractUser):
     username = models.EmailField(('email'),unique=True, max_length=128)
     password = models.CharField(max_length=256)
     adresse = models.CharField(blank=True, null=True, max_length=128)
-    profilpic = ResizedImageField(size=[200,200], default='user/pp/default.webp', upload_to='user/pp', null= True)
+    profilpic = ResizedImageField(size=[200,200], crop=['middle', 'center'], default='user/pp/default.webp', upload_to='user/pp', null= True)
+    phonenumber = models.CharField(('numéro de téléphone'),max_length=50, null=True, blank= True)
     
     __original_pass = None
     __original_image = None
@@ -35,7 +36,7 @@ class User(AbstractUser):
             self.profilpic.name = str(self.uuid)+ '-' + str(int(time.time())) +  file_extension
         self.__original_image = self.profilpic.name
 
-        if self.password != self.__original_pass and (self.is_staff == 0 or issubclass()) :
+        if self.password != self.__original_pass and (self.is_staff == 0) :
             self.password = make_password(self.password)
             super().save(*args, **kwargs)
             self.__original_pass = self.password           
@@ -51,5 +52,5 @@ class User(AbstractUser):
     def get_photo_full_path(self):
         return ('/Media/') + str(self.profilpic)
     
-    def email(self):
+    def mail(self):
         return self.username
