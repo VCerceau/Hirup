@@ -8,3 +8,4 @@ class Entreprise(User):
 
     class Meta:
         verbose_name = 'Entreprise'
+        
