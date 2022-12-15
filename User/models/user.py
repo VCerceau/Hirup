@@ -36,6 +36,7 @@ class User(AbstractUser):
             self.profilpic.name = str(self.uuid)+ '-' + str(int(time.time())) +  file_extension
         self.__original_image = self.profilpic.name
 
+
         if self.password != self.__original_pass and (self.is_staff == 0) :
             self.password = make_password(self.password)
             super().save(*args, **kwargs)

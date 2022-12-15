@@ -10,9 +10,9 @@ class FormationAdmin(admin.ModelAdmin):
     pass
 admin.site.register(Formation, FormationAdmin)
 
-class CompetencesAdmin(admin.ModelAdmin):
+class CompetenceAdmin(admin.ModelAdmin):
     pass
-admin.site.register(Competences, CompetencesAdmin)
+admin.site.register(Competence, CompetenceAdmin)
 
 class IntroductionAdmin(admin.ModelAdmin):
     pass

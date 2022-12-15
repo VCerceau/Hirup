@@ -6,12 +6,14 @@
             <span class="navbar-toggler-icon"></span>
         </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {% if request.user.is_authenticated %}
                 <ul class="navbar-nav nav-pills navtext me-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a href={% url 'profil' %} {% if request.path == '/profil/' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Profil</a></li>
-                        <li class="nav-item"><a href={% url 'cv' %}  {% if request.get_full_path == '/cv/' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Cv</a></li>
+                        <li class="nav-item"><a href={% url 'cv/+user.uuid' %}  {% if request.get_full_path == ('/cv/' + user.uuid) %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Cv</a></li>
                         <li class="nav-item"><a href="#"  {% if request.get_full_path == 'test' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Rechercher</a></li>
                         <li class="nav-item"><a href="#" {% if request.get_full_path == 'test' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Professeurs</a></li>
                 </ul>
+                {% endif %}
                 <ul class="navbar-nav nav-pills navtext mb-2 mb-lg-0 justify-content-between">
                 {% if request.user.is_authenticated %}
                     <li class="nav-item connectionbutton"><a href={% url 'logout' %} {% if request.get_full_path == '/login/' %} class="nav-link selected" {% else %} class="nav-link connectionbutton" {% endif %} >Se déconnecter</a></li>
