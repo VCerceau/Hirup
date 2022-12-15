@@ -10,7 +10,10 @@ def login(request):
 
     return render(request, 'user/login.html')
 
-
+def index(request):
+    user = request.user
+    
+    return render(request, 'index.html', {'user': user})
 
 def profil(request):
     if request.method == 'POST':

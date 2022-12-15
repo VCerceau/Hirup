@@ -5,7 +5,8 @@ from .user import *
 class Personne(User):
     firstname = models.CharField(max_length=64, null=True, blank=True)
     lastname = models.CharField(max_length=64, null=True, blank=True)
-    
+    slug = models.SlugField(null=True, blank=True, unique=True)
+
     class Meta:
         verbose_name = 'Personne'
         
@@ -21,6 +22,8 @@ class Personne(User):
     def save(self,*args, **kwargs):
         # if os.path.isfile(self.get_photo_full_path()):
         #     os.remove(self.get_photo_full_path())
+        if not self.slug or self.slug != self.__original_slug:
+            self.slug = slugify(self.firstname + '-' + self.lastname)
         file_name, file_extension = os.path.splitext(self.profilpic.name)
         if self.profilpic.name != "user/pp/default.webp" and self.profilpic.name != self.__original_image:
             self.profilpic.name = str(self.uuid)+ '-' + str(int(time.time())) +  file_extension
