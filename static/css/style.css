@@ -30,8 +30,14 @@ body{
 .nav-link{
   color: #1b0c02;
 }
+
+.pp{
+  width: 100px;
+  height: auto;
+}
 .logo{
-  width: 80px;
+  width: 200px;
+  height: auto;
 }
 
 

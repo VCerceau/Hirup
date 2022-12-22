@@ -6,6 +6,8 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
 from django_resized import ResizedImageField
+from django.utils.text import slugify
+
 
 
 
@@ -19,6 +21,7 @@ class User(AbstractUser):
     
     __original_pass = None
     __original_image = None
+    __original_slug = None
     
     def __str__(self):
         return f"{self.username, self.uuid}"
@@ -29,20 +32,20 @@ class User(AbstractUser):
         self.__original_image = self.profilpic.name
     
     def save(self,*args, **kwargs):
-        # if os.path.isfile(self.get_photo_full_path()):
-        #     os.remove(self.get_photo_full_path())
+
         file_name, file_extension = os.path.splitext(self.profilpic.name)
         if self.profilpic.name != "user/pp/default.webp" and self.profilpic.name != self.__original_image:
             self.profilpic.name = str(self.uuid)+ '-' + str(int(time.time())) +  file_extension
         self.__original_image = self.profilpic.name
 
 
-        if self.password != self.__original_pass and (self.is_staff == 0) :
-            self.password = make_password(self.password)
-            super().save(*args, **kwargs)
-            self.__original_pass = self.password           
-        else:
-            super().save(*args, **kwargs)
+        # # if self.password != self.__original_pass and (self.is_staff == 0) :
+        # #     self.password = make_password(self.password)
+        # #     super().save(*args, **kwargs)
+        # #     self.__original_pass = self.password           
+        # else:
+        #     super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
         for filenames in os.listdir('Media/user/pp'):
             if str(self.uuid) in filenames and ('user/pp/' + filenames) != self.profilpic.name:
                 os.remove('Media/user/pp/'+ filenames)
