@@ -4,11 +4,29 @@ from User.models.user import User
 from django.contrib.auth import logout
 from django import forms
 from User.forms import EditProfileForm
+from django.contrib.auth.hashers import make_password
+from django.db import models
+
 # Create your views here.
 
 def login(request):
 
     return render(request, 'user/login.html')
+
+def personnesignup(request):
+    if request.method == "POST":
+        
+        username = request.POST["email"]
+        password = make_password(request.POST["password"])
+        firstname = request.POST["firstname"]
+        lastname = request.POST["lastname"]
+        
+        new = Personne(username=username, password=password, firstname=firstname, lastname=lastname)
+        new.save()
+        
+        return render(request, 'user/login.html')
+    else:
+        return render(request, 'user/personnesignup.html')
 
 def index(request):
     user = request.user
@@ -17,24 +35,12 @@ def index(request):
 
 def profil(request):
     if request.method == 'POST':
-        # Récupérer les données du formulaire soumis
-        form = EditProfileForm(request.POST)
-
-        # Vérifier si le formulaire est valide
-        if form.is_valid():
-            form.save(user=request.user.personne)
-            # Enregistrer les données du formulaire en utilisant l'utilisateur actuel
-            # Afficher un message de succès ou rediriger vers une autre page ici
+        pass
     else:
+        context = {}
         # Récupérer les données de l'utilisateur actuel pour préremplir le formulaire
-        initial_data = {
-            'profilpic': request.user.profilpic,
-            'email': request.user.username,
-            'firstname': request.user.personne.firstname,
-            'lastname': request.user.personne.lastname,
-            'phonenumber': request.user.phonenumber,
-            'adresse': request.user.adresse,
-        }
-        form = EditProfileForm(initial=initial_data)
+        user = User.objects.get(uuid = request.user.uuid)
+        context.update({'user': user})
+        
 
-    return render(request, 'user/profil.html', {'form': form})
+    return render(request, 'user/profil.html', context)

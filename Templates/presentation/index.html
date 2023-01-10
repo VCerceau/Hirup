@@ -1,17 +1,54 @@
 {% extends 'base.html' %}
-{% block content %}
-    <div class="container">
-        {% comment %} <h2>{{cv.name}} </h2> {% endcomment %}
-        {% comment %} <div id="add-skill-page">
-            
-            <h1>Créez votre CV</h1>
-            <form method="POST">
-                {% csrf_token %}
-                <label for="name">Mon cv :</label>
-                <input type="text" id="name" name="name">
-                <input type="submit" value="Ajouter">
-            </form>
-        </div> {% endcomment %}
+{% block body %}
+<div class="content">
+    <div class="container mg-4">
+        <h1>
+            {{personne.firstname}} {{personne.lastname}}
+        </h1>
+        {% if cv %}
+        <h1>
+            {{cv.name}}    
+        </h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <img src="{{MEDIA_URL}}{{personne.get_photo_url}}" id="pp" class="img-fluid rounded-circle" href={% url 'profil' %}>
+                </div>
+                {% if competences %}
+                <div class="col-sm-10">
+                    <h3>
+                        Compétences
+                    </h3>
+                    {% for comp in competences %}
+                    {% if creator %}
+                        {% comment %} {% url 'get_or_create' %} {% endcomment %}
+                        <form action= method="post">
+                            {% csrf_token %}
+                            <div class="container">
+                                <div class="form-group">
+                                    <input type="text" class="form-control no-bg" name="comp_title" value="{{comp.title}}">
+                                </div>
+                                <div class="form-group">
+                                    <textarea type="text" class="form-control no-bg" name="comp_title" value="{{comp.description}}"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary"> Envoyer </button>
+                            </div>
+                        </form>
+                        <hr>
+                    {% else %}
+                        tqt
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% else %}
+                    Pas de competence
+                {% endif %}
+            {% else %}
+                Pas de cv
+            {% endif %}
+            </div>
+        </div>
     </div>
+</div>
 
-{% endblock content %}
+{% endblock body %}

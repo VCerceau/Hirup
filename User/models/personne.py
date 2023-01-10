@@ -18,6 +18,7 @@ class Personne(User):
         super().__init__(*args, **kwargs)
         self.__original_pass = self.password
         self.__original_image = self.profilpic.name
+        self.__original_slug = self.slug
     
     def save(self,*args, **kwargs):
         # if os.path.isfile(self.get_photo_full_path()):

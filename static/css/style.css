@@ -1,3 +1,10 @@
+:root{
+  --jaune-ultraclaire: #fffcf5;
+  --jaune-claire: #FFFAF0;
+  --jaune-full: #FF9A16;
+  --noir-hirup: #1b0c02;
+}
+
 body{
   background-color: #FFFAF0 !important; 
   height: 85vh !important;
@@ -10,7 +17,7 @@ body{
   width: 100%;
   font-family: "Mitr";
   font-size:x-large;
-  color: #1b0c02;
+  color: var(--noir-hirup);
 }
 body{
   background: #FFFAF0;
@@ -21,14 +28,14 @@ body{
 }
 
 .content{
-  background: #FFFAF0;
+  background: var(--jaune-claire);
   
 }
 .nav-link.selected{
-  color: #FF9A16;
+  color: var(--jaune-full);
 }
 .nav-link{
-  color: #1b0c02;
+  color: var(--noir-hirup);
 }
 
 .pp{
@@ -92,6 +99,7 @@ h2{
 
 .container {
   padding-top: 50px;
+  max-width: 98% !important;
 }
 img {
   width: 150px;
@@ -122,4 +130,12 @@ input.form-control[readonly] {
 
 .connectionbutton{
   align-self: center !important;
+}
+
+input.no-bg:focus{
+  background-color: var(--jaune-ultraclaire);
+}
+
+.no-bg{
+  background-color: var(--jaune-claire);
 }

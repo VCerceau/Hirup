@@ -6,8 +6,6 @@
 {% block content %}
 <form method="post">
     <div class="container">
-        {{form.errors}}
-        {{user.personne.firstname}}
         <div class="row">
             {% comment %} <div class="col-sm-4">
                 <img src="{{MEDIA_URL}}{{user.get_photo_url}} " id="pp" class="img-fluid rounded-circle">
@@ -56,21 +54,33 @@
             </div> {% endcomment %}
             <form method="POST">
             {% csrf_token %}
-            {% for field in form %}
-            {% if field.label == 'Profilpic' %}
             <div class="col-sm-4">
                 <img src="{{MEDIA_URL}}{{user.get_photo_url}}" id="pp" class="img-fluid rounded-circle">
                 <input type="file">
             </div>
             <div class="col-sm-8">
-                {% else %}
                 <div class="form-group">
-                    <label for={{field.label.lower}}>{{field.label}}</label>
-                    <input type={{field.label.lower}} id={{field.label.lower}} class="form-control border-0" value={{field.value}}>
+                    <label > Email </label>
+                    <input type="email" class="form-control no-bg" value={{user.username}}>
+                </div>
+                <hr>
+                {% if user.personne %}
+                <div class="form-group">
+                    <label > Nom </label>
+                    <input type="text" class="form-control no-bg" value={{user.personne.lastname}}>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label > Prénom </label>
+                    <input type="text" class="form-control no-bg" value={{user.personne.firstname}}>
                 </div>
                 <hr>
                 {% endif %}
-                {% endfor %}
+                <div class="form-group">
+                    <label > Numéro de téléphone </label>
+                    <input type="phone2numeric" class="form-control no-bg" value={{user.phonenumber}}>
+                </div>
+                <hr>
                 <button type="submit">Save</button>
             </div>
         </div>

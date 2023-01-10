@@ -13,6 +13,18 @@
                         <li class="nav-item"><a href="#"  {% if request.get_full_path == 'test' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Rechercher</a></li>
                         <li class="nav-item"><a href="#" {% if request.get_full_path == 'test' %} class="nav-link selected" {% else %} class="nav-link" {% endif %} >Professeurs</a></li>
                 </ul>
+                {% else %}
+                <ul class="navbar-nav nav-pills navtext me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        S'inscrire
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Je suis une personne</a>
+                            <a class="dropdown-item" href="#">Je suis une entreprise</a>
+                        </div>
+                    </li>
+                </ul>
                 {% endif %}
                 <ul class="navbar-nav nav-pills navtext mb-2 mb-lg-0 justify-content-between">
                 {% if request.user.is_authenticated %}
