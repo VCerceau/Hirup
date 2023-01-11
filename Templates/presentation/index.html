@@ -3,7 +3,7 @@
 <div class="content">
     <div class="container mg-4">
         <h1>
-            {{personne.firstname}} {{personne.lastname}}
+            {{user_cv.personne.firstname}} {{user_cv.personne.lastname}}
         </h1>
         {% if cv %}
         <h1>
@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-2">
-                    <img src="{{MEDIA_URL}}{{personne.get_photo_url}}" id="pp" class="img-fluid rounded-circle" href={% url 'profil' %}>
+                    <img src="{{MEDIA_URL}}{{user_cv.personne.get_photo_url}}" id="pp" class="img-fluid rounded-circle" href={% url 'profil' %}>
                 </div>
                 {% if competences %}
                 <div class="col-sm-10">
@@ -20,24 +20,26 @@
                         Compétences
                     </h3>
                     {% for comp in competences %}
-                    {% if creator %}
+                    {% comment %} {% if creator %} {% endcomment %}
                         {% comment %} {% url 'get_or_create' %} {% endcomment %}
-                        <form action= method="post">
+                        <form action={% url 'competences_update_or_create' comp.uuid %} method="post">
                             {% csrf_token %}
                             <div class="container">
                                 <div class="form-group">
-                                    <input type="text" class="form-control no-bg" name="comp_title" value="{{comp.title}}">
+                                    <input type="text" class="form-control no-bg" name="title" value="{{comp.title}}">
                                 </div>
                                 <div class="form-group">
-                                    <textarea type="text" class="form-control no-bg" name="comp_title" value="{{comp.description}}"></textarea>
+                                    <textarea type="text" class="form-control no-bg" name="desc">{{comp.description}}</textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary"> Envoyer </button>
+                                {% if user_cv is user %}
+                                    <button type="submit" class="btn btn-primary"> Envoyer </button>
+                                {% endif %}
                             </div>
                         </form>
                         <hr>
-                    {% else %}
+                    {% comment %} {% else %}
                         tqt
-                    {% endif %}
+                    {% endif %} {% endcomment %}
                     {% endfor %}
                 </div>
                 {% else %}

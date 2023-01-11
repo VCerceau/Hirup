@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
 import uuid
@@ -15,26 +15,39 @@ from User.models import User
 # Create your views here.
 
 def index(request, user_uuid):
-    if request.method == 'GET':
-        user = request.user
-        user_cv = User.objects.get(uuid = user_uuid)
-        personne = Personne.objects.get(uuid = user_uuid)
-        context = {'user' : user,
-                    'personne': personne
-                    }
-        context.update({'creator': (user==user_cv)})
+  user = request.user
+  user_cv = User.objects.get(uuid = user_uuid)
+  context = {'user' : user,
+              'user_cv': user_cv
+              }
+  context.update({'creator': (user==user_cv)})
 
-        cv = get_or_none_with_uuid(classe=Cv, classe_uuid=User, uuid = user_uuid)
-        
-        if cv != None:
-            context.update({'cv':cv})
-            competences = filter_or_none_with_uuid(classe=Competence, classe_uuid=Cv, uuid = cv.uuid)
-            for comp in competences:
-                print(comp.title)
-            if competences:
-                context.update({'competences' : competences})
+  cv = get_or_none_with_uuid(classe=Cv, classe_uuid=User, uuid = user_uuid)
+  
+  if cv != None:
+      context.update({'cv':cv})
+      competences = filter_or_none_with_uuid(classe=Competence, classe_uuid=Cv, uuid = cv.uuid)
+      if competences:
+          context.update({'competences' : competences})
+  return render(request, 'presentation/index.html', context)
 
-    return render(request, 'presentation/index.html', context)
+def competences_update_or_create(request, comp_id):
+  if request.method == 'POST':
+    title = request.POST["title"]
+    desc = request.POST["desc"]
+    # comp = Competence.objects.get_or_create(uuid=comp_id)
+    # print(comp)
+    try:
+      comp = Competence.objects.get(uuid=comp_id)
+      comp.title = title
+      print(desc)
+      comp.description = desc
+      print(comp.description)
+      comp.save()
+    except Competence.DoesNotExist:
+      comp = Competence.objects.create(title=title, description=desc)
+      comp.save()
+  return redirect(index, request.user.uuid)
 
 def create_object(classe, **kwargs):
     classe(**kwargs).save()
