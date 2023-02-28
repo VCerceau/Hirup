@@ -28,6 +28,7 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page=settings.LOGOUT_REDIRECT_URL), name='logout'),
     path('profil/',uviews.profil, name='profil'),
-    path("signup/", uviews.personnesignup, name="signup"),
+    path("signup/personne/", uviews.personnesignup, name="signup_person"),
+    path("signup/entreprise/", uviews.entreprisesignup, name="signup_etp"),
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)

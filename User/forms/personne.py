@@ -4,9 +4,16 @@ from User.models.personne import *
 from django import forms
 
 class PersonneForm(forms.ModelForm):
-  class Meta:
-    model = Personne
-    fields = ['profilpic', 'first_name', 'last_name', 'adresse']
+    class Meta:
+        model = Personne
+        fields = ['profilpic', 'first_name', 'last_name', 'adresse']
+
+class PersonneSignup(forms.ModelForm):
+    username = forms.EmailField(widget=forms.EmailInput, label="Email")
+    password = forms.CharField(widget=forms.PasswordInput)
+    class Meta:
+        model = Personne
+        fields = ['lastname', 'firstname', 'username', 'password']
 
 class EditProfileForm(forms.Form):
     profilpic = forms.FileField(widget=forms.ClearableFileInput(attrs={
