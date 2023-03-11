@@ -3,74 +3,45 @@
 {% block style %}
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 {% endblock style %}
+
+{% load crispy_forms_tags %}
+
 {% block content %}
-<form method="post" action={% url 'profil' %}>
-    <div class="container">
-        <div class="row">
-            {% csrf_token %}
-            <div class="col-sm-4">
-                {% comment %} <img src="{{user.profilpic.url}}" id="pp" class="img-fluid rounded-circle"> {% endcomment %}
-                <img src="{{ user.profilpic.url }}" class="img-fluid rounded-circle">
-                <input type="file" name='profilpic'>
-            </div>
-            <div class="col-sm-8">
-                <div>
-                    <label>Email:</label>
-                    {{form.username}}
-                </div>
-                <hr>
-                {% if user.personne %}
-                <div>
-                    <label > Nom: </label>
-                    {{form.lastname}}
-                </div>
-                <hr>
-                <div>
-                    <label > Prénom: </label>
-                    {{form.firstname}}
-                </div>
-                <hr>
-                {% endif %}
-                <div>
-                    <label > Numéro de téléphone: </label>
-                    {{form.phonenumber}}
-                </div>
-                <hr>
-                <button type="submit">Save</button>
-            </div>
-        </div>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        <img src="{{user.profilpic.url}}">
     </div>
+    {{ form | crispy }}
+    {% if user.personne %}
+        <div id="id_firstname" class="mb-3"> 
+            <label for="id_firstname" class="form-label requiredField">
+                Prénom
+            </label>
+            <input type="text" name="firstname" class="form-control" value="{{user.personne.firstname}}" id="id_firstname">
+        </div>        
+        <div id="id_lastname" class="mb-3"> 
+            <label for="id_lastname" class="form-label requiredField">
+                Nom
+            </label>
+            <input type="text" name="lastname" class="form-control" value="{{user.personne.lastname}}" id="id_lastname">
+        </div>      
+    {% elif user.entreprise %}
+        <div id="id_name" class="mb-3"> 
+            <label for="id_name" class="form-label requiredField">
+                Nom
+            </label>
+            <input type="text" name="name" class="form-control" value="{{user.entreprise.name}}" id="id_name">
+        </div>        
+        <div id="id_siret" class="mb-3"> 
+            <label for="id_siret" class="form-label requiredField">
+                Siret
+            </label>
+            <input type="text" name="siret" class="form-control" value="{{user.entreprise.siret}}" id="id_siret">
+        </div>  
+    {% endif %}
+    <p class="small">* champ requis</p>
+
+    <input type="submit">
 </form>
-<script>
-        // Récupérer tous les boutons avec un crayon
-        const buttons = document.querySelectorAll('button');
-    
-    // Ajouter un gestionnaire d'événement click pour chaque bouton
-    buttons.forEach(button => {
-        button.addEventListener('click', event => {
-            // Récupérer le champ associé au bouton cliqué
-            const input = button.previousElementSibling;
-            
-            // Changer l'état de lecture seule du champ
-            input.readOnly = !input.readOnly;
-
-        
-        });
-    });
-
-    // Récupérer l'élément input pour l'image de profil
-    const input = document.querySelector('input[type="image"]');
-
-    // Ajouter un gestionnaire d'événement change pour l'élément input
-    input.addEventListener('change', event => {
-        // Récupérer l'image choisie par l'utilisateur
-        const image = event.target.files[0];
-
-        // Récupérer l'élément img pour l'image de profil
-        const img = document.getElementById('pp');
-
-        // Mettre à jour l'attribut src de l'élément img avec l'image choisie par l'utilisateur
-        img.src = URL.createObjectURL(image);
-    });
-</script>
 {% endblock content %}

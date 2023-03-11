@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from User.models.personne import Personne
+from User.models.entreprise import Entreprise
 from User.models.user import User
 from django.contrib.auth import logout
 from django import forms
@@ -9,6 +10,9 @@ from django.db import models
 from django.contrib.auth.decorators import login_required
 from .forms.personne import EditProfileForm
 
+from User.forms.personne import PersonneSignup
+from User.forms.entreprise import EntrepriseSignup
+from User.forms.user import ProfileForm
 # Create your views here.
 
 def login(request):
@@ -17,41 +21,74 @@ def login(request):
 
 def personnesignup(request):
     if request.method == "POST":
+        form = PersonneSignup(request.POST)
+        context = {
+            'form':form
+        }
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+        else:
+            return render(request, 'user/personnesignup.html', context)
         
-        username = request.POST["email"]
-        password = make_password(request.POST["password"])
-        firstname = request.POST["firstname"]
-        lastname = request.POST["lastname"]
-        
-        new = Personne(username=username, password=password, firstname=firstname, lastname=lastname)
-        new.save()
-        
-        return render(request, 'user/login.html')
     else:
-        return render(request, 'user/personnesignup.html')
+        form = PersonneSignup()
+        context = {
+            'form':form
+        }
+        return render(request, 'user/personnesignup.html', context)
+
+def entreprisesignup(request):
+    if request.method == "POST":
+        form = EntrepriseSignup(request.POST)
+        context = {
+            'form':form
+        }
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+        else:
+            return render(request, 'user/entreprisesignup.html', context)
+        
+    else:
+        form = EntrepriseSignup()
+        context = {
+            'form':form
+        }
+        return render(request, 'user/entreprisesignup.html', context)
+
 
 def index(request):
     user = request.user
     
     return render(request, 'index.html', {'user': user})
 
-
-@login_required
 def profil(request):
-    context = {}
-    # Récupérer les données de l'utilisateur actuel pour préremplir le formulaire
-    personne = get_object_or_404(Personne, pk=request.user.uuid)
-    context.update({'user': personne})
-    if request.method == 'POST':
-        form = EditProfileForm(files = request.FILES, instance=personne, data=request.POST)
-        if form.is_valid():
-            print(request.FILES)
-            personne.profilpic = request.FILES
-            form.save()
-    else:
-        form = EditProfileForm(instance=personne)
-    context.update({'form':form})
-    return render(request, 'user/profil.html', context)
+    form = None
+    user = request.user
 
-def test(request):
-    return render(request, 'test.html')
+    if request.method == 'POST':
+        form = ProfileForm(request.POST,request.FILES,instance=user)
+        print(form)
+        if form.is_valid():
+            user = form.save(commit=False)
+            if Personne.objects.get(pk=user.pk):
+                personne = user.personne
+                personne.firstname = request.POST['firstname']
+                personne.lastname = request.POST['lastname']
+                personne.save()
+            elif Entreprise.objects.get(pk=user.pk):
+                entreprise = user.entreprise
+                entreprise.name = request.POST['name']
+                entreprise.siret = request.POST['siret']
+                entreprise.save()
+            user.save()
+        else:
+            print('bbbbb')
+    else:
+        form = ProfileForm(instance=user)
+    context = {
+        'user':user,
+        'form':form,
+    }
+    return render(request, 'user/profil.html', context)

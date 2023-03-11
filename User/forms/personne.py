@@ -8,6 +8,13 @@ class PersonneForm(forms.ModelForm):
         model = Personne
         fields = ['profilpic', 'first_name', 'last_name', 'adresse']
 
+class PersonneSignup(forms.ModelForm):
+    username = forms.EmailField(widget=forms.EmailInput, label="Email")
+    password = forms.CharField(widget=forms.PasswordInput)
+    class Meta:
+        model = Personne
+        fields = ['lastname', 'firstname', 'username', 'password']
+
 class EditProfileForm(forms.ModelForm):
     username = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control no-bg'}),)
     firstname = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control no-bg'}), required=False)
