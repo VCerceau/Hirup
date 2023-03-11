@@ -1,7 +1,7 @@
 from django import forms
 from Presentation.models import Competence, Cv
 
-class competenceForm(forms.ModelForm):
+class CompetenceForm(forms.ModelForm):
   class Meta:
     model = Competence
     fields = ['title', 'description', 'cv']

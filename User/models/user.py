@@ -16,8 +16,8 @@ class User(AbstractUser):
     username = models.EmailField(('email'),unique=True, max_length=128)
     password = models.CharField(max_length=256)
     adresse = models.CharField(blank=True, null=True, max_length=128)
-    profilpic = ResizedImageField(size=[200,200], crop=['middle', 'center'], default='user/pp/default.webp', upload_to='user/pp', null= True)
-    phonenumber = models.CharField(('numéro de téléphone'),max_length=50, null=True, blank= True)
+    profilpic = ResizedImageField(size=[200,200], crop=['middle', 'center'], default='user/pp/default.webp', upload_to='user/pp/', null = True)
+    phonenumber = models.CharField(('numéro de téléphone'),max_length=50, null=True, blank=True)
     
     __original_pass = None
     __original_image = None
@@ -33,22 +33,14 @@ class User(AbstractUser):
     
     def save(self,*args, **kwargs):
 
-        file_name, file_extension = os.path.splitext(self.profilpic.name)
-        if self.profilpic.name != "user/pp/default.webp" and self.profilpic.name != self.__original_image:
-            self.profilpic.name = str(self.uuid)+ '-' + str(int(time.time())) +  file_extension
-        self.__original_image = self.profilpic.name
-
-
-        # # if self.password != self.__original_pass and (self.is_staff == 0) :
-        # #     self.password = make_password(self.password)
-        # #     super().save(*args, **kwargs)
-        # #     self.__original_pass = self.password           
-        # else:
-        #     super().save(*args, **kwargs)
+        # file_name, file_extension = os.path.splitext(self.profilpic.name)
+        # if self.profilpic.name != "user/pp/default.webp" and self.profilpic.name != self.__original_image:
+        #     self.profilpic.name = str(self.uuid)+ '-' + str(int(time.time())) +  file_extension
+        # self.__original_image = self.profilpic.name
         super().save(*args, **kwargs)
-        for filenames in os.listdir('Media/user/pp'):
-            if str(self.uuid) in filenames and ('user/pp/' + filenames) != self.profilpic.name:
-                os.remove('Media/user/pp/'+ filenames)
+        # for filenames in os.listdir('Media/user/pp'):
+        #     if str(self.uuid) in filenames and ('user/pp/' + filenames) != self.profilpic.name:
+        #         os.remove('Media/user/pp/'+ filenames)
     @property
     def get_photo_url(self):
         return self.profilpic
