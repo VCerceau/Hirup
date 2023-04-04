@@ -20,7 +20,7 @@ class Personne(User):
         self.__original_image = self.profilpic.name
         self.__original_slug = self.slug
     
-    def save(self,*args, **kwargs):
+    # def save(self,*args, **kwargs):
         # if os.path.isfile(self.get_photo_full_path()):
         #     os.remove(self.get_photo_full_path())
         if not self.slug or self.slug != self.__original_slug:

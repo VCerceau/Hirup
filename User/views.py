@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import render, get_object_or_404, redirect
 from User.models.personne import Personne
 from User.models.entreprise import Entreprise
 from User.models.user import User
@@ -7,6 +7,9 @@ from django import forms
 from User.forms import EditProfileForm
 from django.contrib.auth.hashers import make_password
 from django.db import models
+from django.contrib.auth.decorators import login_required
+from .forms.personne import EditProfileForm
+
 from User.forms.personne import PersonneSignup
 from User.forms.entreprise import EntrepriseSignup
 from User.forms.user import ProfileForm

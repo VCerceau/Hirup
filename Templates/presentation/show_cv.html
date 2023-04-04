@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    <form action= method="post">
+        {% csrf_token %}
+        <div class="container">
+            <div class="form-group">
+                <input type="text" class="form-control no-bg" name="title" value="{{comp.title}}">
+            </div>
+            <div class="form-group">
+                <textarea type="text" class="form-control no-bg" name="desc">{{comp.description}}</textarea>
+            </div>
+            {% comment %} {% if user_cv is user %} {% endcomment %}
+            <button type="submit" class="btn btn-primary"> Envoyer </button>
+            {% comment %} {% endif %} {% endcomment %}
+        </div>
+    </form>
+    <hr>
+{% endblock content %}
