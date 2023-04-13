@@ -20,21 +20,34 @@ def login(request):
     return render(request, 'user/login.html')
 
 def personnesignup(request):
+    """Handle user sign-up requests.
+
+    This function is responsible for processing user sign-up requests.
+    If the request method is POST, it creates a new instance of the PersonneSignup
+    form with the submitted data and saves the form data to the database if it is valid.
+    If the form is not valid, it re-renders the sign-up page with the invalid form data.
+    If the request method is not POST, it creates a new instance of the PersonneSignup form.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        A rendered HTML template.
+    """
     if request.method == "POST":
         form = PersonneSignup(request.POST)
         context = {
-            'form':form
+            'form': form
         }
         if form.is_valid():
             form.save()
             return redirect('login')
         else:
             return render(request, 'user/personnesignup.html', context)
-        
     else:
         form = PersonneSignup()
         context = {
-            'form':form
+            'form': form
         }
         return render(request, 'user/personnesignup.html', context)
 
