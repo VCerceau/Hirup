@@ -37,11 +37,12 @@ python3 .\manage.py runserver
 Or create the admin user using :
 ```bash
 python3 .\manage.py createsuperuser
-which will askfor:
-email (required field it will be the username)
-adresse electronique (optionnal)
-password (required field)
 ```
+###which will askfor:
+###email (required field it will be the username)
+###adresse electronique (optionnal)
+###password (required field)
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
