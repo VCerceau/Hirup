@@ -4,16 +4,17 @@ from Presentation.models import Experience, Cv
 class ExperienceForm(forms.ModelForm):
   class Meta:
     model = Experience
-    fields = ['title', 'description', 'cv']
+    fields = ['title', 'description']
+    title = forms.CharField(max_length=30, label='Titre:')
     
     def __init__(self, *args, **kwargs):
-        # Get the user from the kwargs
-        user = kwargs.pop('user')
+      # Get the user from the kwargs
+      user = kwargs.pop('user')
 
-        # Get the user's CV
-        cv = Cv.objects.get(user=user)
+      # Get the user's CV
+      cv = Cv.objects.get(user=user)
 
-        # Set the cv foreign key on the form instance
-        self.instance.cv = cv
+      # Set the cv foreign key on the form instance
+      self.instance.cv = cv
 
-        super().__init__(*args, **kwargs)    
+      super().__init__(*args, **kwargs)    

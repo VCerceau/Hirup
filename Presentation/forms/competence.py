@@ -4,7 +4,7 @@ from Presentation.models import Competence, Cv
 class CompetenceForm(forms.ModelForm):
   class Meta:
     model = Competence
-    fields = ['title', 'description', 'cv']
+    fields = ['title', 'description']
     
     def __init__(self, *args, **kwargs):
       # Get the user from the kwargs

@@ -2,7 +2,7 @@ from django.db import models
 import uuid
 from .categorie import *
 from .cv import *
-from User.models.personne import *
+from User.models import Personne
 
 
 class Experience(models.Model):

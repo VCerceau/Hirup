@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="POST" action="{% url 'search_cv' %}">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Search</button>
+</form>
+{% if query %}
+<h2>Search Results for "{{ query }}"</h2>
+<ul>
+    {% for cv in cvs %}
+        <li>{{ cv.name }}</li>
+    {% empty %}
+        <li>No CVs found.</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+
+{% endblock content %}

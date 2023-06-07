@@ -14,9 +14,6 @@ class CompetenceAdmin(admin.ModelAdmin):
     pass
 admin.site.register(Competence, CompetenceAdmin)
 
-class IntroductionAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(Introduction, IntroductionAdmin)
 
 class CategorieAdmin(admin.ModelAdmin):
     pass

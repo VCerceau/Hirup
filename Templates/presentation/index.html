@@ -1,56 +1,105 @@
 {% extends 'base.html' %}
 {% block body %}
+{% load crispy_forms_tags %}
 <div class="content">
-    <div class="container mg-4">
-        <h1>
-            {{user_cv.personne.firstname}} {{user_cv.personne.lastname}}
-        </h1>
-        {% if cv %}
-        <h1>
-            {{cv.name}}    
-        </h1>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-2">
-                    <img src="{{MEDIA_URL}}{{user_cv.personne.get_photo_url}}" id="pp" class="img-fluid rounded-circle" href={% url 'profil' %}>
-                </div>
-                {% if competences %}
-                <div class="col-sm-10">
-                    <h3>
-                        Compétences
-                    </h3>
-                    {% for comp in competences %}
-                    {% comment %} {% if creator %} {% endcomment %}
-                        {% comment %} {% url 'get_or_create' %} {% endcomment %}
-                        <form action={% url 'competences_update_or_create' comp.uuid %} method="post">
+    <div class="row">
+        <div class="col-sm-3 border border-warning bg-warning text-center">
+            {% if cv %}
+            <p><a href={% url 'cv_form' cv.uuid %}>Voir le CV</a></p>
+            {% endif %}
+            <!-- Add image, name and other information here -->
+            <img src={{user_cv.personne.get_photo_url.url}} class="img-fluid rounded-circle pp m-1" alt="Person's Image">
+            <h2>{{user_cv.personne.firstname}} {{user_cv.personne.lastname}}</h2>
+            <p>Adresse: {{user_cv.personne.adresse}}</p>
+            <p>Téléphone: {{user_cv.personne.phonenumber}}</p>
+            <p>Mail: {{user_cv.username}}</p>
+        </div>
+        <div class="col-sm-8">
+            {% if not cv %}
+                <label for="cvform title">Créer votre CV:</label>
+                <form action="{% url 'update_cv' %}" method="post">
+                    {% csrf_token %}
+                    {{ cvform | crispy }}
+                    <p class="small">* champ requis</p>
+                    <input type="submit" value="Créer">
+                </form>
+
+            {% else %}
+            {% comment %} <h1 class="text-center">
+                {{cv.name}}
+            </h1>
+            <h2 class="text-center">{{cv.introduction}}</h2> {% endcomment %}
+            <form action={% url 'update_cv' %} method="post">
+                {% csrf_token %}
+                {{ cvform | crispy }}
+                <button type="submit">Enregistrer</button>
+            </form>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h3>
+                            Compétences
+                        </h3>
+                        <form action={% url 'competences_form' cv.uuid %} method="post" >
                             {% csrf_token %}
-                            <div class="container">
-                                <div class="form-group">
-                                    <input type="text" class="form-control no-bg" name="title" value="{{comp.title}}">
-                                </div>
-                                <div class="form-group">
-                                    <textarea type="text" class="form-control no-bg" name="desc">{{comp.description}}</textarea>
-                                </div>
-                                {% if user_cv is user %}
-                                    <button type="submit" class="btn btn-primary"> Envoyer </button>
-                                {% endif %}
+                            {{ competenceformset.management_form }}
+                            <div id="competence-forms">
+                                {% for competence_form  in competenceformset %}
+                                    <div class="competence-form">
+                                    {{ competence_form | crispy}}
+                                    </div>
+                                {% endfor %}
                             </div>
+                            <button type="submit">Enregistrer</button>
                         </form>
                         <hr>
-                    {% comment %} {% else %}
-                        tqt
-                    {% endif %} {% endcomment %}
-                    {% endfor %}
+                    </div>
                 </div>
-                {% else %}
-                    Pas de competence
-                {% endif %}
-            {% else %}
-                Pas de cv
-            {% endif %}
             </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h3>Expériences</h3>
+                        <form action={% url 'experiences_form' cv.uuid %} method="post" >
+                            {% csrf_token %}
+                            {{ experienceformset.management_form }}
+                            <div id="experience-forms">
+                                {% for experience_form in experienceformset %}
+                                    <div class="experience-form">
+                                    {{ experience_form | crispy}}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <button type="submit">Enregistrer</button>
+                        </form>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h3>Formations</h3>
+                        <form action={% url 'formation_form' cv.uuid %} method="post">
+                            {% csrf_token %}
+                            {{ formationformset.management_form }}
+                            <div id="formation-forms">
+                                {% for formation_form in formationformset %}
+                                    <div class="formation-form">
+                                        {{ formation_form | crispy}}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <button type="submit">Enregistrer</button>
+                        </form>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
 
 {% endblock body %}
+{% block footer %}{% endblock footer %}

@@ -20,10 +20,10 @@ class Personne(User):
         self.__original_image = self.profilpic.name
         self.__original_slug = self.slug
     
-    # def save(self,*args, **kwargs):
-        # if os.path.isfile(self.get_photo_full_path()):
-        #     os.remove(self.get_photo_full_path())
-        if not self.slug or self.slug != self.__original_slug:
+    def save(self,*args, **kwargs):
+        if os.path.isfile(self.get_photo_full_path()):
+            os.remove(self.get_photo_full_path())
+        if not self.slug or self.slug != self.__original_slug or self.firstname not in self.slug or self.lastname not in self.slug:
             self.slug = orig = slugify(self.firstname + '-' + self.lastname)
             for x in itertools.count(1):
                 if not Personne.objects.filter(slug=self.slug).exists():

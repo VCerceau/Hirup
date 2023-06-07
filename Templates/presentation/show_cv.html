@@ -1,18 +1,82 @@
 {% extends "base.html" %}
-{% block content %}
-    <form action= method="post">
-        {% csrf_token %}
-        <div class="container">
-            <div class="form-group">
-                <input type="text" class="form-control no-bg" name="title" value="{{comp.title}}">
-            </div>
-            <div class="form-group">
-                <textarea type="text" class="form-control no-bg" name="desc">{{comp.description}}</textarea>
-            </div>
-            {% comment %} {% if user_cv is user %} {% endcomment %}
-            <button type="submit" class="btn btn-primary"> Envoyer </button>
-            {% comment %} {% endif %} {% endcomment %}
+{% block body %}
+{% load crispy_forms_tags %}
+<div class="content">
+    <div class="row">
+        <div class="col-sm-3 border border-warning bg-warning text-center">
+            {% if cv_owner.uuid == user.uuid %}
+            <p><a href={% url 'update_cv' %}>Editer le CV</a></p>
+            {% endif %}
+            <!-- Add image, name and other information here -->
+            <img src={{cv_owner.personne.get_photo_url.url}} class="img-fluid rounded-circle pp m-1" alt="Person's Image">
+            <h2>{{cv_owner.personne.firstname}} {{user_cv.personne.lastname}}</h2>
+            <p>Adresse: {{cv_owner.personne.adresse}}</p>
+            <p>Téléphone: {{cv_owner.personne.phonenumber}}</p>
+            <p>Mail: {{cv_owner.username}}</p>
         </div>
-    </form>
-    <hr>
-{% endblock content %}
+        <div class="col-sm-8">
+            <h1 class="text-center">
+                {{cv.name}}
+            </h1>
+            <h2 class="text-center">{{cv.introduction}}</h2>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h3>
+                            Compétences
+                        </h3>
+                            <div id="competence-forms">
+                                {% for competence  in competences %}
+                                    <div>
+                                        <h2> {{competence.title}} </h2>
+                                        <p> {{ competence.description }} </p> 
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h3>
+                            Expériences
+                        </h3>
+                            <div id="competence-forms">
+                                {% for experience  in experiences %}
+                                    <div>
+                                        <h2> {{experience.title}} </h2>
+                                        <p> {{ experience.description }} </p> 
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h3>
+                            Formations
+                        </h3>
+                            <div id="competence-forms">
+                                {% for formation  in formations %}
+                                    <div>
+                                        <h2> {{formation.title}} </h2>
+                                        <p> {{ formation.description }} </p> 
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
+{% block footer %}{% endblock footer %}
